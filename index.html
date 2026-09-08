@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Screen</title>
 </head>
 <style>
   * {
     background-color: black;
-    cursor: default;
   }
   html, body {
       margin: 0;
@@ -16,19 +13,13 @@
       height: 100%;
     }
 </style>
-
 <body>
 <script>
-document.addEventListener("click", ({ ctrlKey }) => {
-    if (!ctrlKey) return;
-
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    } else {
-        document.documentElement.requestFullscreen();
-    }
-});
-  </script>
+document.querySelector('#app').innerHTML = `
+  <div>
+    <h1>Hello, World!</h1>
+  </div>
+`;
+</script>
 </body>
-
 </html>
