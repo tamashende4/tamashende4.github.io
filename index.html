@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Zenelejátszó</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .player {
+            width: 500px;
+            max-width: 90%;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,.5);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #1db954;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background: #1aa34a;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #status {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="player">
+    <h2>URL Zenelejátszó</h2>
+
+    <input
+        type="text"
+        id="url"
+        placeholder="Írd be a zene URL-jét..."
+    >
+
+    <button onclick="playMusic()">Lejátszás</button>
+
+    <audio id="audioPlayer" controls></audio>
+
+    <div id="status"></div>
+</div>
+
+<script>
+    function playMusic() {
+        const url = document.getElementById("url").value.trim();
+        const audio = document.getElementById("audioPlayer");
+        const status = document.getElementById("status");
+
+        if (!url) {
+            status.textContent = "Adj meg egy URL-t!";
+            return;
+        }
+
+        status.textContent = "Lejátszás indítása...";
+
+        audio.src = url;
+
+        audio.play()
+            .then(() => {
+                status.textContent = "Lejátszás folyamatban.";
+            })
+            .catch(error => {
+                console.error(error);
+                status.textContent =
+                    "A böngésző nem tudta lejátszani ezt az URL-t.";
+            });
+    }
+</script>
+
+</body>
+</html>
